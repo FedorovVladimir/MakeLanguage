@@ -22,7 +22,6 @@ public class MyVisitor extends CPP14BaseVisitor<Node> {
 
     @Override
     public Node visitLiteral(CPP14Parser.LiteralContext ctx) {
-//        System.out.println("literal " + ctx.getChild(0).getText());
         String strConst = ctx.getChild(0).getText();
         int constant = strConst.indexOf(".");
         if (constant > 0)
@@ -46,9 +45,11 @@ public class MyVisitor extends CPP14BaseVisitor<Node> {
             Node node = super.visit(ctx.getChild(1));
             value = node.getText();
         }
-        TypeLexeme typeLexeme = TypeLexeme.DOUBLE;
+        TypeLexeme typeLexeme;
         if (type.equals("int")) {
             typeLexeme = TypeLexeme.INT;
+        } else {
+            typeLexeme = TypeLexeme.DOUBLE;
         }
         Node node = new Node(typeLexeme, value);
         if (vars.get(name) == null) {
@@ -56,23 +57,26 @@ public class MyVisitor extends CPP14BaseVisitor<Node> {
         } else {
             System.out.println("Переменная " + name + " уже определена!");
         }
-//        System.out.println(vars);
         return super.visitInitdeclarator(ctx);
     }
 
     @Override
     public Node visitSelectionstatement(CPP14Parser.SelectionstatementContext ctx) {
         try {
-            if (Double.parseDouble(super.visit(ctx.getChild(2)).getText()) != 0) {
+            if (Math.abs(Double.parseDouble(super.visit(ctx.getChild(2)).getText())) > 0.001) {
                 return super.visit(ctx.getChild(4));
             } else {
-                return super.visit(ctx.getChild(6));
+                if (ctx.getChildCount() > 6) {
+                    return super.visit(ctx.getChild(6));
+                } else {
+                    return new Node(TypeLexeme.VOID);
+                }
             }
         } catch (Exception e) {
             System.out.println("Выражение в if не корректно!");
             System.exit(1);
         }
-        return super.visitSelectionstatement(ctx);
+        return new Node(TypeLexeme.VOID);
     }
 
 
@@ -175,7 +179,11 @@ public class MyVisitor extends CPP14BaseVisitor<Node> {
         if (ctx.getChildCount() > 1) {
             String name = ctx.getChild(0).getText();
             Node node = super.visit(ctx.getChild(2));
-            vars.put(name, node);
+            if (vars.get(name) != null) {
+                vars.put(name, node);
+            } else {
+                System.out.println("Переменная " + name + " не определена!");
+            }
             return node;
         } else {
             return super.visitAssignmentexpression(ctx);
