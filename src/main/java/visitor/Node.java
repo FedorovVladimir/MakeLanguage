@@ -16,7 +16,7 @@ public class Node {
 
     @Override
     public String toString() {
-        return "Node " + text;
+        return "Node " + typeLexeme + " " + text;
     }
 
     public String getText() {
@@ -26,24 +26,38 @@ public class Node {
     public Node add(Node node) {
         double a = Double.parseDouble(text);
         double b = Double.parseDouble(node.getText());
+        TypeLexeme typeLexeme = getType(node.typeLexeme);
         return new Node(typeLexeme, String.valueOf(a + b));
+    }
+
+    private TypeLexeme getType(TypeLexeme type) {
+        TypeLexeme typeLexeme;
+        if (this.typeLexeme == TypeLexeme.DOUBLE || type == TypeLexeme.DOUBLE) {
+            typeLexeme = TypeLexeme.DOUBLE;
+        } else {
+            typeLexeme = TypeLexeme.INT;
+        }
+        return typeLexeme;
     }
 
     public Node sub(Node node) {
         double a = Double.parseDouble(text);
         double b = Double.parseDouble(node.getText());
+        TypeLexeme typeLexeme = getType(node.typeLexeme);
         return new Node(typeLexeme, String.valueOf(a - b));
     }
 
     public Node mul(Node node) {
         double a = Double.parseDouble(text);
         double b = Double.parseDouble(node.getText());
+        TypeLexeme typeLexeme = getType(node.typeLexeme);
         return new Node(typeLexeme, String.valueOf(a * b));
     }
 
     public Node div(Node node) {
         double a = Double.parseDouble(text);
         double b = Double.parseDouble(node.getText());
+        TypeLexeme typeLexeme = getType(node.typeLexeme);
         return new Node(typeLexeme, String.valueOf(a / b));
     }
 
@@ -81,5 +95,9 @@ public class Node {
         double a = Double.parseDouble(text);
         double b = Double.parseDouble(node.getText());
         return a != b;
+    }
+
+    public TypeLexeme getType() {
+        return typeLexeme;
     }
 }

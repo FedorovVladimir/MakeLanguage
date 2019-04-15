@@ -9,7 +9,19 @@ import org.antlr.v4.runtime.tree.ParseTree;
 public class Main {
     private static String code = "" +
             "void main(){" +
-            "cout << 23.5;" +
+            "   int a = 2;" +
+            "   cout << a;" +
+            "   a = 3;" +
+            "   cout << a;" +
+            "   " +
+            "   int b = 1;" +
+            "   if (b == 1) {" +
+            "       cout << 100 * 2;" +
+            "       a = 4;" +
+            "   } else {" +
+            "       cout << 200 / 3;" +
+            "   }" +
+            "   cout << a;" +
             "}";
 
     public static void main(String[] args) {
