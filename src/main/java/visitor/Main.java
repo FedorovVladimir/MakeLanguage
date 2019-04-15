@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 public class Main {
     private static String code = "" +
             "void main(){" +
-            "cout << 23;" +
+            "cout << 23.5;" +
             "}";
 
     public static void main(String[] args) {
