@@ -174,12 +174,8 @@ public class MyVisitor extends CPP14BaseVisitor<Node> {
     public Node visitAssignmentexpression(CPP14Parser.AssignmentexpressionContext ctx) {
         if (ctx.getChildCount() > 1) {
             String name = ctx.getChild(0).getText();
-            String value = super.visit(ctx.getChild(2)).getText();
-            TypeLexeme type = super.visit(ctx.getChild(2)).getType();
-            Node node = new Node(type, value);
-//            System.out.println(vars);
+            Node node = super.visit(ctx.getChild(2));
             vars.put(name, node);
-//            System.out.println(vars);
             return node;
         } else {
             return super.visitAssignmentexpression(ctx);

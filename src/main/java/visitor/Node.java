@@ -20,6 +20,9 @@ public class Node {
     }
 
     public String getText() {
+        if (typeLexeme == TypeLexeme.INT) {
+            return String.valueOf((int)Double.parseDouble(text));
+        }
         return text;
     }
 
@@ -57,7 +60,7 @@ public class Node {
     public Node div(Node node) {
         double a = Double.parseDouble(text);
         double b = Double.parseDouble(node.getText());
-        TypeLexeme typeLexeme = getType(node.typeLexeme);
+        TypeLexeme typeLexeme = TypeLexeme.DOUBLE;
         return new Node(typeLexeme, String.valueOf(a / b));
     }
 
