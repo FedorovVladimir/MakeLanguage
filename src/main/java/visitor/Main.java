@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 public class Main {
     private static String code = "" +
-            "void main(){" +
+            "void main() {" +
             "   int a = 2 + 9;" +
             "   cout << a;" +
             "   a = 3;" +
@@ -19,9 +19,18 @@ public class Main {
             "   if (b < 1) {" +
             "       cout << 100 * 2;" +
             "       a = 4;" +
+            "       int c = 0;" +
+            "       if (c == 0) {" +
+            "           c = 4;" +
+            "           int d = 9;" +
+            "           cout << d;" +
+            "       }" +
+            "       cout << c;" +
+            "       cout << d;" +
             "   } else {" +
             "       cout << 200 / 3;" +
             "   }" +
+            "   " +
             "   if (a == 4) {" +
             "       cout << 111;" +
             "   }" +

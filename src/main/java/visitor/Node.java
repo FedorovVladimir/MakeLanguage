@@ -118,15 +118,15 @@ public class Node {
     }
 
     public void display(int n) {
-        if (left != null) {
-            left.display(n);
+        if (right != null) {
+            right.display(n + 1);
         }
         for (int i = 0; i < n; i++) {
             System.out.print("\t");
         }
         System.out.println(toString());
-        if (right != null) {
-            right.display(n + 1);
+        if (left != null) {
+            left.display(n);
         }
     }
 }

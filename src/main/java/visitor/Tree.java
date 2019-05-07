@@ -1,9 +1,14 @@
 package visitor;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Tree {
 
     private Node root;
     private Node current;
+
+    private List<Node> stack = new LinkedList<Node>();
 
     public Tree() {
         root = new Node();
@@ -38,11 +43,20 @@ public class Tree {
     }
 
     public void in() {
-
+        Node n = new Node();
+        current.left = n;
+        n.parent = current;
+        current = n;
+        stack.add(current);
+        Node n2 = new Node();
+        current.right = n2;
+        n2.parent = current;
+        current = n2;
     }
 
     public void out() {
-
+        current = stack.get(stack.size() - 1);
+        stack.remove(stack.size() - 1);
     }
 
     public void display() {

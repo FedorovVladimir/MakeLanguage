@@ -19,7 +19,7 @@ public class MyVisitor extends CPP14BaseVisitor<Node> {
             if (super.visit(ctx.getChild(2)) != null) {
                 System.out.println(super.visit(ctx.getChild(2)).getText());
             } else {
-                System.out.println("Ошибка вывода");
+                System.out.println("Переменная не найдена");
             }
         }
         return super.visitShiftexpression(ctx);
@@ -69,10 +69,16 @@ public class MyVisitor extends CPP14BaseVisitor<Node> {
     public Node visitSelectionstatement(CPP14Parser.SelectionstatementContext ctx) {
         try {
             if (Math.abs(Double.parseDouble(super.visit(ctx.getChild(2)).getText())) > 0.001) {
-                return super.visit(ctx.getChild(4));
+                vars.in();
+                Node n = super.visit(ctx.getChild(4));
+                vars.out();
+                return n;
             } else {
                 if (ctx.getChildCount() > 6) {
-                    return super.visit(ctx.getChild(6));
+                    vars.in();
+                    Node n = super.visit(ctx.getChild(6));
+                    vars.out();
+                    return n;
                 } else {
                     return new Node(TypeLexeme.VOID);
                 }
