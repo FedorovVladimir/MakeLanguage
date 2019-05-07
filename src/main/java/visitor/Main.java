@@ -43,7 +43,8 @@ public class Main {
         ParseTree tree = parser.translationunit();
         MyVisitor myVisitor = new MyVisitor();
         myVisitor.visit(tree);
-        myVisitor.vars.display();
+        // посдендняя строка - вывод дерева
+//        myVisitor.vars.display();
     }
 }
 
