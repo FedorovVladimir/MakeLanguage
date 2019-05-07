@@ -10,13 +10,17 @@ import java.util.Map;
 public class MyVisitor extends CPP14BaseVisitor<Node> {
 
 //    private Map<String, Node> vars = new HashMap<String, Node>();
-    private Tree vars = new Tree();
+    public Tree vars = new Tree();
     private String type;
 
     @Override
     public Node visitShiftexpression(CPP14Parser.ShiftexpressionContext ctx) {
         if (ctx.getChildCount() > 1) {
-            System.out.println(super.visit(ctx.getChild(2)).getText());
+            if (super.visit(ctx.getChild(2)) != null) {
+                System.out.println(super.visit(ctx.getChild(2)).getText());
+            } else {
+                System.out.println("Ошибка вывода");
+            }
         }
         return super.visitShiftexpression(ctx);
     }

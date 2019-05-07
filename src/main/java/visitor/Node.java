@@ -3,7 +3,16 @@ package visitor;
 public class Node {
 
     private TypeLexeme typeLexeme;
-    private String text;
+    public String text;
+    public String name = "";
+
+    public Node parent = null;
+    public Node left = null;
+    public Node right = null;
+
+    public Node() {
+        typeLexeme = TypeLexeme.EMPTY;
+    }
 
     public Node(TypeLexeme typeLexeme) {
         this.typeLexeme = typeLexeme;
@@ -16,7 +25,11 @@ public class Node {
 
     @Override
     public String toString() {
-        return "Node " + typeLexeme + " " + text;
+        return "Node{" +
+                "typeLexeme=" + typeLexeme +
+                ", text='" + text + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public String getText() {
@@ -102,5 +115,18 @@ public class Node {
 
     public TypeLexeme getType() {
         return typeLexeme;
+    }
+
+    public void display(int n) {
+        if (left != null) {
+            left.display(n);
+        }
+        for (int i = 0; i < n; i++) {
+            System.out.print("\t");
+        }
+        System.out.println(toString());
+        if (right != null) {
+            right.display(n + 1);
+        }
     }
 }

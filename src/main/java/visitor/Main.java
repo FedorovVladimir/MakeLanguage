@@ -32,7 +32,9 @@ public class Main {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CPP14Parser parser = new CPP14Parser(tokens);
         ParseTree tree = parser.translationunit();
-        new MyVisitor().visit(tree);
+        MyVisitor myVisitor = new MyVisitor();
+        myVisitor.visit(tree);
+        myVisitor.vars.display();
     }
 }
 
