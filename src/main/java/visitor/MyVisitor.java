@@ -9,7 +9,8 @@ import java.util.Map;
 
 public class MyVisitor extends CPP14BaseVisitor<Node> {
 
-    private Map<String, Node> vars = new HashMap<String, Node>();
+//    private Map<String, Node> vars = new HashMap<String, Node>();
+    private Tree vars = new Tree();
     private String type;
 
     @Override
